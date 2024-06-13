@@ -54,9 +54,17 @@ def get_user_from_token(token: str = Depends(oauth2_scheme)):
             algorithms=[ALGORITHM])
         return payload.get('sub')
     except jwt.ExpiredSignatureError:
-        pass
+        raise HTTPException(
+            status_code=401,
+            detail='Access Token has expired or expiration date is invalid!',
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
     except jwt.InvalidTokenError:
-        pass
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid token",
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
 
 
 # Функция для получения пользовательских данных на основе имени пользователя
