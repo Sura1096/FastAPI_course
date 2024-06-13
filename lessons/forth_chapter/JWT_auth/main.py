@@ -33,7 +33,16 @@ def authenticate_user(username: str, password: str) -> bool:
 
 # Функция для создания JWT токена
 def create_jwt_token(data: dict):
-    return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
+    payload = data.copy()
+    expiration_time = TIME_NOW + timedelta(minutes=TOKEN_EXP_MIN)
+
+    payload.update({'iat': TIME_NOW, 'exp': expiration_time})
+
+    token = jwt.encode(
+        payload=payload,
+        key=SECRET_KEY,
+        algorithm=ALGORITHM)
+    return token
 
 
 # Функция получения User'а по токену
