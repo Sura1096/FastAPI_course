@@ -95,9 +95,14 @@ async def login(user: User):
 
 
 # защищенный роут для получения информации о пользователе
-@app.get('/about_me')
-async def about_me(current_user: str = Depends(get_user_from_token)):
-    user = get_user(current_user)
-    if user:
-        return user
-    return {'error': 'User not found'}
+@app.get('/protected_resource')
+async def authenticate_user(cur_user: str = Depends(get_user_from_token)):
+    user = get_user(cur_user)
+
+    if not user:
+        raise HTTPException(
+            status_code=401,
+            detail='Invalid credentials',
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
+    return user
