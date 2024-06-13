@@ -10,7 +10,7 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 
 # Секретный ключ для подписи и верификации токенов JWT
 SECRET_KEY = 'mysecretkey'  # в реальной практике используется команда Bash 'openssl rand -hex 32'
-ALGORITHM = 'HS256'  # плюс в реальной жизни мы устанавливаем "время жизни" токена
+ALGORITHM = 'HS256'
 
 USER_DATA = [
     {'username': 'admin',
