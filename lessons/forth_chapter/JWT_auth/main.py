@@ -12,6 +12,10 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl='login')
 SECRET_KEY = 'mysecretkey'  # в реальной практике используется команда Bash 'openssl rand -hex 32'
 ALGORITHM = 'HS256'
 
+# Переменные для установки срока действия токена
+TIME_NOW = datetime.now(UTC)
+TOKEN_EXP_MIN = 10
+
 USER_DATA = [
     {'username': 'admin',
      'password': 'adminpass'}
