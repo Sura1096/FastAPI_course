@@ -48,7 +48,10 @@ def create_jwt_token(data: dict):
 # Функция получения User'а по токену
 def get_user_from_token(token: str = Depends(oauth2_scheme)):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(
+            jwt=token,
+            key=SECRET_KEY,
+            algorithms=[ALGORITHM])
         return payload.get('sub')
     except jwt.ExpiredSignatureError:
         pass
