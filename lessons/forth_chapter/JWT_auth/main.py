@@ -16,6 +16,7 @@ ALGORITHM = 'HS256'
 TIME_NOW = datetime.now(UTC)
 TOKEN_EXP_MIN = 10
 
+# Пример информации из БД
 USER_DATA = [
     {'username': 'admin',
      'password': 'adminpass'}
