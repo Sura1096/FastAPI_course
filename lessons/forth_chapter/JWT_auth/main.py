@@ -77,12 +77,21 @@ def get_user(username: str):
 
 # примерный роут для аутентификации
 @app.post('/login')
-async def login(user_in: User):
-    for user in USER_DATA:
-        if user.get('username') == user_in.username and user.get('password') == user_in.password:
-            return {'access_token': create_jwt_token({'sub': user_in.username}),
-                    'token_type': 'bearer'}
-    return {'error': 'Invalid credentials'}
+async def login(user: User):
+    user_get = get_user(user.username)
+
+    if user_get.get('password') != user.password:
+        raise HTTPException(
+            status_code=401,
+            detail='Invalid username or password',
+            headers={'WWW-Authenticate': 'Bearer'},
+        )
+
+    return {
+            'access_token': create_jwt_token(
+                {'sub': user.username}
+            ),
+        }
 
 
 # защищенный роут для получения информации о пользователе
