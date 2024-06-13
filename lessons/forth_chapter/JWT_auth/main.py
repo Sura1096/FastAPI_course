@@ -23,6 +23,14 @@ USER_DATA = [
 ]
 
 
+# Фукнция для проверки "username" и "password" по базе данных пользователя
+def authenticate_user(username: str, password: str) -> bool:
+    for user in USER_DATA:
+        if username == user.get('username') and password == user.get('password'):
+            return True
+    return False
+
+
 # Функция для создания JWT токена
 def create_jwt_token(data: dict):
     return jwt.encode(data, SECRET_KEY, algorithm=ALGORITHM)
