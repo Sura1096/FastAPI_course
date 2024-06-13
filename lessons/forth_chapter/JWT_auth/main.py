@@ -1,9 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException
-from fastapi.security import OAuth2PasswordBearer
-import jwt
 from models.models import User
 from dependencies.jwt import create_jwt_token, get_user, get_user_from_token
-from datetime import datetime, timedelta, UTC
 
 
 app = FastAPI()
