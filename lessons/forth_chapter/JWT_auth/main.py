@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, status
 from models.models import User
 from dependencies.jwt import create_jwt_token, get_user, get_user_from_token
 
@@ -13,7 +13,7 @@ async def login(user: User):
 
     if user_get.get('password') != user.password:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Invalid username or password',
             headers={'WWW-Authenticate': 'Bearer'},
         )
@@ -32,7 +32,7 @@ async def authenticate_user(cur_user: str = Depends(get_user_from_token)):
 
     if not user:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Invalid credentials',
             headers={'WWW-Authenticate': 'Bearer'},
         )
