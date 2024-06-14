@@ -1,4 +1,4 @@
-from fastapi import Depends, HTTPException
+from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 from datetime import datetime, timedelta, UTC
@@ -53,13 +53,13 @@ def get_user_from_token(token: str = Depends(oauth2_scheme)):
         return payload.get('sub')
     except jwt.ExpiredSignatureError:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail='Access Token has expired or expiration date is invalid!',
             headers={'WWW-Authenticate': 'Bearer'},
         )
     except jwt.InvalidTokenError:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid token",
             headers={'WWW-Authenticate': 'Bearer'},
         )
