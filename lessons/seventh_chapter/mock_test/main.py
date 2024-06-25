@@ -17,7 +17,7 @@ def get_anime(anime_id):
 
 
 @app.get("/data/{anime_id}", response_model=dict)
-async def get_todo(anime_id: int):
+async def get_anime(anime_id: int):
     data = get_anime(anime_id)
     if data:
         return get_parsed_data(data)
