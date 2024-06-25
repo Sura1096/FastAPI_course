@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from models.models import User
-from dependencies.jwt import create_jwt_token, get_user, get_user_from_token
+from dependencies.JWT import create_jwt_token, get_user, get_user_from_token
 
 
 app = FastAPI()
