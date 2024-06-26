@@ -35,3 +35,18 @@ class TestMain(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json(), mock_parsed_data)
+
+    @patch("main.get_anime")
+    def test_not_found_anime(self, mock_get_anime):
+        mock_get_anime.return_value = None
+
+        error_raised = {
+            "detail": "Anime not found"
+        }
+
+        response = client.get("/data/2")
+        mock_get_anime.assert_called_once()
+
+        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.json(), error_raised)
+
