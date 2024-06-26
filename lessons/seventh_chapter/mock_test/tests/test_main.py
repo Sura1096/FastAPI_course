@@ -7,7 +7,7 @@ from unittest.mock import patch
 client = TestClient(app)
 
 
-class TestMain(unittest.TestCase):
+class TestGetAnimeData(unittest.TestCase):
     @patch("main.get_anime")
     @patch("main.get_parsed_data")
     def test_get_anime_and_parse(self, mock_parse_anime, mock_get_anime):
