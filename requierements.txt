@@ -6,6 +6,7 @@ psycopg2-binary==2.9.9
 pydantic==2.5.3
 pydantic-settings==2.2.1
 PyJWT==2.8.0
+pytest==8.2.2
 requests==2.25.1
 SQLAlchemy==2.0.30
 uvicorn==0.29.0
